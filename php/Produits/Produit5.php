@@ -31,7 +31,7 @@
       <!-- Zone du produit -->
       <div class="carte_produit">
           <?php
-           $resultat = $bdd->query("SELECT * FROM enceinte WHERE idEnceinte = 4;");
+           $resultat = $bdd->query("SELECT * FROM enceinte WHERE idEnceinte = 5;");
            while ($donnees = $resultat->fetch()){
           ?> 
          <div class="zone_gauche">
