@@ -12,21 +12,8 @@
       <title>A Propos</title>
    </head>
    <body>
-      <nav>
-         <img src="../assets/Divers/logo1.png">
-         <input type="checkbox" id="check">
-         <label for="check">
-         <i class="fas fa-bars" id="btn"></i>
-         <i class="fas fa-times" id="cancel"></i>
-         </label>
-         <ul>
-            <li><a href="../php/accueil.php"><i class="fas fa-home"></i> Accueil</a></li>
-            <li><a href="../php/magasin.php"><i class="fas fa-store"></i> Magasin</a></li>
-            <li><a href="../php/apropos.php"><i class="far fa-address-card"></i> A propos</a></li>
-            <li><a href="../php/panier.php"><i class="fas fa-cart-arrow-down"></i> Panier</a></li>
-            <?php require '../php/Fonctions/fonct_connex.php';?>
-         </ul>
-      </nav>
+   <?php include "menu.php";?>
+
       <svg id="wave_apropos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
       <path fill="#2c3e50" fill-opacity="1" d="M0,32L48,42.7C96,53,192,75,288,96C384,117,480,139,576,144C672,149,768,139,864,117.3C960,96,1056,64,1152,48C1248,32,1344,32,1392,32L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
       </svg>

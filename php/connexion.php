@@ -28,22 +28,8 @@
       <title>Connexion</title>
    </head>
    <body>
-      <nav>
-      <img src="../assets/Divers/logo1.png">
-         <input type="checkbox" id="check">
-         <label for="check">
-         <i class="fas fa-bars" id="btn"></i>
-         <i class="fas fa-times" id="cancel"></i>
-         </label>
-         <ul>
-            <li><a href="../php/accueil.php"><i class="fas fa-home"></i> Accueil</a></li>
-            <li><a href="../php/magasin.php"><i class="fas fa-store"></i> Magasin</a></li>
-            <li><a href="../php/apropos.php"><i class="far fa-address-card"></i> A propos</a></li>
-            <li><a href="../php/panier.php"><i class="fas fa-cart-arrow-down"></i> Panier</a></li>  
-            <?php require '../php/Fonctions/fonct_connex.php';?>
+   <?php include "menu.php";?>
 
-            </ul>
-      </nav>
        <!-- Formulaire de connexion -->
        <div class="login-box" id="form-connexion">
 			<h2 class="titre_box">CONNEXION</h2>
