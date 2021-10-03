@@ -1,4 +1,12 @@
-<?php require 'Fonctions/fonction_session.php';?>
+<?php 
+   require 'Fonctions/fonction_session.php';
+    if (!empty($_POST['idEnceinteSuppr'])) {
+        $idEnceinteSuppr = $_POST['idEnceinteSuppr'];
+
+        $sqlSuppr = $bdd->query("DELETE FROM panier WHERE idEnceinte = '$idEnceinteSuppr';");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
    <head>
@@ -35,14 +43,24 @@
          <div class="produits">
             <!--Cadre du produit  -> A utiliser pour l'ajout au panier -->            
             <?php
-                  if (!empty($_SESSION["loginPersonne"]))
-                  {
-              
-                      $loginPersonne = $_SESSION["loginPersonne"];
-                      $recupproduit = $bdd->query("SELECT * FROM panier WHERE loginPersonne ='$loginPersonne'");
-                      while ($donnees = $recupproduit->fetch())
-                      {
-              ?>		   
+            $loginPersonne = $_SESSION['loginPersonne'];
+            $_SESSION['totalPanier'] = 0;
+            if (empty($_SESSION['loginPersonne'])) {
+               $verifTable = $bdd->query("SELECT COUNT(*) AS nbProduitTable FROM panier WHERE loginPersonne = '$loginPersonne';");
+               $DonneesVerifTable = $verifTable->fetch();
+               if ($DonneesVerifTable['nbProduitTable'] == 0) {
+                  echo " Votre Panier est vide";
+               }
+            }
+            else {
+               $resultat = $bdd->query("SELECT * FROM panier WHERE loginPersonne = '$loginPersonne';");
+               while ($donnees = $resultat->fetch()){
+                  $idEnceinte = $donnees['idEnceinte'];
+                  $select = $bdd->query("SELECT * FROM enceinte WHERE idEnceinte = '$idEnceinte';");
+                  $donneesProduit = $select->fetch();
+                  // $prixTotal = $donneesProduit['prixEnceinte'] * $donnees['quantitevoulue'];
+                  // $_SESSION['totalPanier'] = $_SESSION['totalPanier'] + $prixTotal;
+             ?>	   
             <div class="enceinte">
               <img src="<?php echo  $donnees ['imgEnceinte'];?>" />
                   <div class="enceinte-info">
@@ -50,18 +68,19 @@
                      <h4 class="enceinte-marque"><?php echo $donnees['marqueEnceinte']?></h4>
                      <h5 class="enceinte-prix">Prix : <?php echo $donnees['prixEnceinte']?> €</h5>                
                      <!-- Rajouter la quantité  -->
-                     <form method="POST" action="../php/Fonctions/fonction_supp.php">
-                        <input name="idEnceinte" type="hidden" value="'.$donnees['idEnceinte'].'">
-                        <button class="suppression-enceinte" type="submit" name="suppanier" value="suppanier">
+                     <form method="POST" action="panier.php">
+                     <input name="idEnceinteSuppr" type="hidden" value="<?php echo $idEnceinte;?>">
+	                        <button class="suppression-enceinte" type="submit" name="Supprimer" value="Supprimer">
                            <i class="fa fa-trash" aria-hidden="true"></i>
                            Supprimer l'article
                         </button>
                      </form>
+                  
                      </div>
-               </div>
+                  </div>
                <?php
                       }
-                     }
+                  }
                ?>
                <!-- Fin du cadre  -->
             </div>
